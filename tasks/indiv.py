@@ -10,21 +10,19 @@
 """
 
 
-def brackets_check(s):
-    meetings = 0
-    for c in s:
-        if c == '(':
-            meetings += 1
-        elif c == ')':
-            meetings -= 1
-            if meetings < 0:
-                return False
-
-    return meetings == 0
+def check_brackets(string):
+    left = string.find("(")
+    right = string.rfind(")")
+    if left == -1 and right == -1:
+        return True
+    elif left == -1 or right == -1 or right < left:
+        return False
+    else:
+        return check_brackets(string[left + 1:right])
 
 
 if __name__ == '__main__':
-    if brackets_check(input('Введите строку: ')):
+    if check_brackets(input("Введите скобочную последовательность: ")):
         print('True')
     else:
         print('False')
